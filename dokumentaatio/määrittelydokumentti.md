@@ -2,7 +2,9 @@
 
 ## Spesifikaatiot
 Opinto-ohjelma: Tietojenkäsittelytieteen kandi
+
 Ohjelmointikieli: Python
+
 Dokumentaation kieli: Suomi (vertaisarviointi onnistuu myös englanniksi)
 
 ## Aihe
@@ -11,7 +13,7 @@ Pelin voittaa yhdistämällä ensimmäisenä neljä oman värin nappulaa suoraan
 Tavoitteenani on luoda pygamen avulla peli, jota voi pelata tekoälyä tai kaveria vastaan.
 
 ## Käytettävät algoritmit
-Pelin tekoälyn luomiseen aion käyttää minmax-algoritmia, jota voidaan tehostaa alpha-beta karsinnalla. 
+Pelin tekoälyn luomiseen aion käyttää minimax-algoritmia, jota voidaan tehostaa alpha-beta karsinnalla. 
 Näin saadaan binääripuun haaroja karsittua, jotta tekoälyn toiminta on nopeampaa.
 
 ## Aika- ja tilavaativuusarvio
