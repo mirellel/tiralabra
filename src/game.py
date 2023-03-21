@@ -2,8 +2,9 @@ import sys
 import pygame
 from board import Board
 
-class MainGame():
 
+class MainGame():
+    '''Luokka, joka tulee vastaamaan pelin tapahtumien käsittelystä'''
     def __init__(self):
 
         pygame.init()
