@@ -1,12 +1,10 @@
-import pygame
-from game import MainGame
-
+'''Moduuli, joka käynnistää pelin'''
+from files.menu import Menu
 
 def main():
-    pygame.init()
-    game = MainGame()
-
-    game.run()
+    '''Funktio aloittaa sovelluksen pyörityksen'''
+    game = Menu()
+    game.run_menu()
 
 if __name__ == "__main__":
     main()
