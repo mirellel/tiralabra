@@ -1,4 +1,6 @@
 import unittest
+import os
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 from files.game import MainGame
 from files.game_logic import *
 
