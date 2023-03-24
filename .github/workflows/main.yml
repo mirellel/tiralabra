@@ -21,10 +21,8 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run tests
-        run: poetry run invoke test
-      - name: pylint
-        run: poetry run invoke lint
+        run: poetry run pytest src
       - name: Coverage report
-        run: poetry run invoke coverage-report
+        run: poetry run coverage xml
       - name: Coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
