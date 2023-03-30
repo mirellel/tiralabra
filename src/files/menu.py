@@ -1,5 +1,6 @@
 import pygame
 from files.game import MainGame
+from files.two_player import MultiPlayer
 from UI.menu_ui import MenuUI
 
 class Menu:
@@ -38,5 +39,5 @@ class Menu:
     def mouse_click(self, position):
         '''Käsittelee hiirenklikkejä'''
         if self.ui.two_player_button.collidepoint(position):
-            two_player_game = MainGame()
+            two_player_game = MultiPlayer()
             two_player_game.run()
