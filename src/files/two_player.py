@@ -1,9 +1,9 @@
-'''Tähän tulee koodi, joka vastaa kahden ihmispelaajan välisestä pelistä'''
+'''Moduuli, johon kuuluu kahden ihmispelaajan välisestä pelistä vastaava luokka'''
 import pygame
 from UI.game_ui import GameUI
 from files.game import MainGame
 
-class MultiPlayer():
+class MultiPlayer:
 
     def __init__(self):
         self.ui = GameUI()
@@ -64,6 +64,7 @@ class MultiPlayer():
                 self.green_turn = True
             self.drop_piece(self.board, row, column, player)
             self.check_victory()
+        return self.board
 
     def drop_piece(self, board, row, column, player):
         board[row][column] = player 
@@ -80,6 +81,7 @@ class MultiPlayer():
         if result == 2:
             self.red_win = True
             self.game_over = True
+        return result
 
     def check_tie(self):
         if self.game.is_board_full(self.board):
