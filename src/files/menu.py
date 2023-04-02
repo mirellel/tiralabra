@@ -1,17 +1,17 @@
+'''Moduuli, joka sisältää Menusta huolehtivan luokan Menu'''
 import pygame
-from files.game import MainGame
 from files.two_player import MultiPlayer
 from UI.menu_ui import MenuUI
 
 class Menu:
     '''Funktio, joka vastaa aloitusmenun logiikasta'''
     def __init__(self):
-        self.ui = MenuUI()
+        self.menu_ui = MenuUI()
 
     def run_menu(self):
         '''Pyörittää menua'''
         pygame.init()
-        self.ui.setup()
+        self.menu_ui.setup()
         self.menu_loop()
 
 
@@ -27,7 +27,7 @@ class Menu:
 
     def draw_screen(self):
         '''Funktio kutsuu UI:n samannimistä funktiota piirtämään ruudun'''
-        self.ui.draw_screen()
+        self.menu_ui.draw_screen()
 
     def menu_loop(self):
         '''Kutsuu funktioita, jotka piirtävät ruudut ja
@@ -38,6 +38,6 @@ class Menu:
 
     def mouse_click(self, position):
         '''Käsittelee hiirenklikkejä'''
-        if self.ui.two_player_button.collidepoint(position):
+        if self.menu_ui.two_player_button.collidepoint(position):
             two_player_game = MultiPlayer()
             two_player_game.run()

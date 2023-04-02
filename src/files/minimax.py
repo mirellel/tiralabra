@@ -1,5 +1,5 @@
+'''Moduuli, joka sisältää minimax-algoritmin suorittavan luokan Minimax'''
 from math import inf
-import random
 from files.game import MainGame
 order = [3, 2, 4, 1, 5, 0, 6]
 
@@ -9,47 +9,48 @@ class Minimax:
     ihmispelaajaa vastaan"""
 
     def __init__(self):
+        '''Alustaa luokan attributit'''
         self.game = MainGame()
         self.max_score = 1000000000000
         self.min_score = -1000000000000
 
     def minimax(self, board, depth, alpha, beta, max_player):
+        '''Funktio, joka sisältää minimax-algoritmin'''
         if depth == 0:
             return self.score(board)
-        
+
         if max_player:
             best_score = -inf
-            for x in order:
-                y = self.lowest_free(board, x)
-                if y == -1:
+            for col in order:
+                row = self.game.get_empty_row(board, col)
+                if row == -1:
                     continue
-                board[y][x] = 2
+                board[row][col] = 2
                 score = self.minimax(board, depth-1, alpha, beta, False)
-                board[y][x] = 0
+                board[row][col] = 0
                 best_score = max(best_score, score)
                 alpha = max(alpha, score)
-                if beta <= alpha:
+                if alpha >= beta:
                     break
             return best_score
-        
+
         if not max_player:
             best_score = inf
-            for x in order:
-                y = self.lowest_free(board, x)
-                if y == -1:
+            for col in order:
+                row = self.game.get_empty_row(board, col)
+                if row == -1:
                     continue
-                board[y][x] = 1
+                board[row][col] = 1
                 score = self.minimax(board, depth-1, alpha, beta, True)
-                board[y][x] = 0
+                board[row][col] = 0
                 best_score = min(best_score, score)
                 beta = min(beta, score)
-                if beta <= alpha:
+                if alpha >= beta:
                     break
             return best_score
 
-
-        
     def score(self, board):
+        '''Laskee pelilaudan tilanteelle arvon'''
         value = 0
 
         '''Tarkistaa vaakatasoisen siirron arvon'''
@@ -81,6 +82,7 @@ class Minimax:
         return value
 
     def rate_move(self, possible_move):
+        '''Laskee arvon mahdolliselle siirrolle'''
         score = 0
         if possible_move.count(2) == 4:
             score += 10
@@ -97,6 +99,7 @@ class Minimax:
 
 
     def valid_location(self, board):
+        '''Palauttaa listan vapaana olevista siirroista'''
         valid_locations = []
         for col in range(self.game.cols):
             if not self.game.is_column_full(board, col):

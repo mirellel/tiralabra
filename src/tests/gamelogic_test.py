@@ -1,7 +1,9 @@
+'''Moduuli, joka sisältää testiluokan TestGame'''
 import unittest
 import os
-os.environ["SDL_VIDEODRIVER"] = "dummy"
 from files.game import MainGame
+os.environ["SDL_VIDEODRIVER"] = "dummy"
+
 
 class TestGame(unittest.TestCase):
     '''Testiluokka game_logic tiedostossa oleville funktioille'''
