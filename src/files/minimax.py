@@ -11,8 +11,6 @@ class Minimax:
     def __init__(self):
         '''Alustaa luokan attributit'''
         self.game = MainGame()
-        self.max_score = 1000000000000
-        self.min_score = -1000000000000
 
     def minimax(self, board, depth, alpha, beta, max_player):
         '''Funktio, joka sisältää minimax-algoritmin'''
