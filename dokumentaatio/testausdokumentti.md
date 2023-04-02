@@ -1,12 +1,10 @@
 ## Testausdokumentti
 
 #### Yksikkötestauksen kattavuusraportti tällä hetkellä
-![image](https://user-images.githubusercontent.com/101889891/229354727-a633396a-36af-4355-bbd1-1d7a8e581c4b.png)
+![image](https://user-images.githubusercontent.com/101889891/229357012-fa21bcfc-58c6-4508-befb-08ab829b62fa.png)
 
 Testikattavuudesta on jätetty pois kokoaan UI:sta huolehtivat luokat, jotka ovat omassa kansiossaan UI.
-Jätin myös pois tiedoston load_image.py sekä toistaiseksi minimax-algoritmin sisältävän tiedoston. Jätin algoritmin
-toistaiseski testikattavuuden ulkopuolelle, koska en ole vielä käynyt algoritmien testausta koskevalla
-luennolla, joten en tiedä miten sitä pitäisi testata järkevästi.
+Jätin myös pois tiedoston load_image.py. Testikattavuus jäi pieneksi, koska en vielä ole testannut minimax-algoritmia.
 
 ### Mitä on testattu
 Olen tähän mennessä testannut Unittest-yksikkötesteillä pelilogiikan ja kaksinpelin toimintaa.
