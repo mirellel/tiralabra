@@ -8,9 +8,13 @@ sekä arvioi mahdolliset siirrot.
 
 Kirjoitin myös testejä luokalle MultiPlayer ja loin pelilogiikalle oman luokan MainGame. Lisäsin CI-putkeen
 pylint-laatutarkastuksen ja käytin paljon aikaa myös koodin kattavaan kommentointiin ja laadun tarkistukseen.
-Aloitin lopuksi kirjoittamaan testausdokumenttia.
+Aloitin lopuksi kirjoittamaan testausdokumenttia. Ongelmia aiheutti hieman koodin refoktorointi ja funktioiden siirtäminen omaan luokkaan.
 
 
 ### Ajankäyttö
 
 Työskentelin tällä viikolla 13 tuntia. 
+
+### Mitä seuraavaksi?
+
+Ensi viikolla aion aloittaa algoritmilla toimivan pelin koodaukseen. Haluaisin saada ohjelman toimimaan niin, että algoritmi osaa laskea siirron oikein ja tiputtaa pelinappulan paikalleen. En vielä ala koodaamaan eri vaikeusasteita, mutta aloitan helposta tasosta eli matalasta syvyydestä. Aloitan myös algoritmin/ suorituskyvyn testauksen keskiviikon testausluennon jälkeen.
