@@ -1,6 +1,7 @@
 '''Moduuli, joka sisältää Menusta huolehtivan luokan Menu'''
 import pygame
 from files.two_player import MultiPlayer
+from files.singleplayer import SinglePlayer
 from UI.menu_ui import MenuUI
 
 class Menu:
@@ -41,3 +42,6 @@ class Menu:
         if self.menu_ui.two_player_button.collidepoint(position):
             two_player_game = MultiPlayer()
             two_player_game.run()
+        if self.menu_ui.singleplayer_button.collidepoint(position):
+            singleplayer_game = SinglePlayer()
+            singleplayer_game.run()
