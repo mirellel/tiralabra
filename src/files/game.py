@@ -112,6 +112,8 @@ class MainGame():
 
     def get_empty_row(self, board, column):
         '''Tarkastaa alimman rivin annetusta sarakkeesta'''
-        for row in range(0, 6):
+        for row in range(self.rows):
             if board[row][column] == 0:
                 return row
+            
+        return -1
