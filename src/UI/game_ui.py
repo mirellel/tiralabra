@@ -29,7 +29,7 @@ class GameUI:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("CONNECT 4")
 
-    def draw_board(self, board, game_over, mouse_position, green_turn, green_win, red_win):
+    def draw_board(self, board, game_over, mouse_position, green_turn, green_win, red_win, ai_player):
         '''Funktio, joka piirtää pelilaudan, joka koostuu neiliöistä ja ympyröistä.'''
         self.screen.fill(self.white)
         for row in range(self.rows):
@@ -51,6 +51,7 @@ class GameUI:
                                                                  (row*self.square_size+
                                                                   self.square_size//2)),
                                                                  self.radius)
+                    
                 elif board[row][col] == 2:
                     pygame.draw.circle(self.screen, self.red, (col*self.square_size+
                                                                self.square_size//2,
@@ -58,15 +59,17 @@ class GameUI:
                                                                  (row*self.square_size+
                                                                   self.square_size//2)),
                                                                  self.radius)
+                    
+            
         if game_over:
             self.draw_victory(green_win, red_win)
         if not game_over:
-            self.draw_piece(mouse_position, green_turn)
+            self.draw_piece(mouse_position, green_turn, ai_player)
             pygame.display.flip()
         pygame.display.update()
         pygame.display.flip()
 
-    def draw_piece(self, mouse_position, green_turn):
+    def draw_piece(self, mouse_position, green_turn, ai_player):
         '''Funktio, joka piirtää liikutettavan pelinappulan pelilaudan
         yläpuolelle'''
         x_cordinate = mouse_position[0]
@@ -81,7 +84,11 @@ class GameUI:
             self.screen.blit(green_piece, (x_cordinate, 0))
 
         else:
-            self.screen.blit(red_piece, (x_cordinate, 0))
+            if ai_player:
+                ai_text = self.font.render("lasketaan siirtoa", True, (0, 0, 0))
+                self.screen.blit(ai_text, (135, 25))
+            else:
+                self.screen.blit(red_piece, (x_cordinate, 0))
 
     def draw_victory(self, green_win, red_win):
         '''Funktio, joka ilmoittaa voitosta'''
@@ -93,7 +100,6 @@ class GameUI:
                                     True, (self.red))
         restart_text = self.font.render("Paina r palataksesi Menuun", True,
                                         self.blue)
-        pygame.time.wait(1000)
         self.screen.fill(self.white)
         self.screen.blit(text, (120, self.height/2))
         self.screen.blit(restart_text, (100, 400))
