@@ -29,7 +29,8 @@ class GameUI:
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("CONNECT 4")
 
-    def draw_board(self, board, game_over, mouse_position, green_turn, green_win, red_win, ai_player):
+    def draw_board(self, board, game_over, mouse_position, green_turn,
+                   green_win, red_win, ai_player):
         '''Funktio, joka piirtää pelilaudan, joka koostuu neiliöistä ja ympyröistä.'''
         self.screen.fill(self.white)
         for row in range(self.rows):
@@ -51,7 +52,7 @@ class GameUI:
                                                                  (row*self.square_size+
                                                                   self.square_size//2)),
                                                                  self.radius)
-                    
+
                 elif board[row][col] == 2:
                     pygame.draw.circle(self.screen, self.red, (col*self.square_size+
                                                                self.square_size//2,
@@ -59,8 +60,7 @@ class GameUI:
                                                                  (row*self.square_size+
                                                                   self.square_size//2)),
                                                                  self.radius)
-                    
-            
+
         if game_over:
             self.draw_victory(green_win, red_win)
         if not game_over:

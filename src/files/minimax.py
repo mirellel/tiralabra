@@ -47,7 +47,7 @@ class Minimax:
                 if alpha >= beta:
                     break
             return best_score
-        
+
     def best_move(self, board, depth):
         '''Kutsuu Minimax-algoritmia ja palauttaa parhaan
         mahdollisen siirron tuple-muodossa'''
@@ -107,15 +107,19 @@ class Minimax:
                 value += self.count_three(d_diagonal)
 
         return value
-    
+
     def count_three(self, line):
+        '''Tarkastaa onko annetulla suoralla 3 samaa
+        ja palauttaa arvon sen mukaan'''
         if line.count(1) == 3:
             return -100
         if line.count(2) == 3:
             return 10
         return 0
-    
+
     def count_four(self, line):
+        '''Tarkastaa onko annetulla suoralla 4 samaa
+        ja palauttaa arvon sen mukaan'''
         if line.count(1) == 4:
             return -1000
         if line.count(2) == 4:

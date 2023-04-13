@@ -69,7 +69,7 @@ class MultiPlayer:
             if self.green_turn:
                 player = 1
                 self.green_turn = False
-                if self.ai_player == True:
+                if self.ai_player:
                     self.ai_turn = True
             else:
                 player = 2

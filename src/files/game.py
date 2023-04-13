@@ -115,5 +115,5 @@ class MainGame():
         for row in range(self.rows):
             if board[row][column] == 0:
                 return row
-            
+
         return -1

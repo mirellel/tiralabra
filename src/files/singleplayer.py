@@ -1,9 +1,10 @@
 '''Moduuli, joka sisältää luokan SinglePlayer'''
+import pygame
 from files.two_player import MultiPlayer
 from files.minimax import Minimax
-import pygame
 
 class SinglePlayer(MultiPlayer):
+    '''Perii MultiPlayer luokan ja vastaa pelistä teköälyä vastaan'''
     def __init__(self):
         super().__init__()
         self.depth = 2
@@ -11,11 +12,12 @@ class SinglePlayer(MultiPlayer):
         self.minimax = Minimax()
 
     def ai_move(self):
+        '''Suorittaa tekoälyn siirron'''
         row, col = self.minimax.best_move(self.board, self.depth)
         self.board[row][col] =2
         self.green_turn = True
 
-    
+
     def handle_player_move(self, column):
         '''Suorittaa pelaajan antaman siirron ja
         palauttaa siirron jälkeisen pelilaudan'''
@@ -33,8 +35,7 @@ class SinglePlayer(MultiPlayer):
                 self.check_tie()
                 self.ai_move()
             self.drop_piece(self.board, row, column, player)
-            
+
             self.check_victory()
             self.check_tie()
         return self.board
-
