@@ -49,6 +49,8 @@ class Minimax:
             return best_score
         
     def best_move(self, board, depth):
+        '''Kutsuu Minimax-algoritmia ja palauttaa parhaan
+        mahdollisen siirron tuple-muodossa'''
         action = (-1, -1)
         top_score = -inf
         for col in order:
@@ -105,41 +107,17 @@ class Minimax:
                 value += self.count_three(d_diagonal)
 
         return value
-
-    def rate_move(self, possible_move):
-        '''Laskee arvon mahdolliselle siirrolle'''
-        score = 0
-        if possible_move.count(2) == 4:
-            score += 10
-        elif possible_move.count(2) == 3 and possible_move.count(0) == 1:
-            score += 10
-        elif possible_move.count(2) == 2 and possible_move.count(0) == 1:
-            score += 4
-        if possible_move.count(1) == 3 and possible_move.count(0) == 1:
-            score -=10
-        if possible_move.count(1) == 2 and possible_move.count(0) == 2:
-            score -=4
-
-        return score
-
-
-    def valid_location(self, board):
-        '''Palauttaa listan vapaana olevista siirroista'''
-        valid_locations = []
-        for col in range(self.game.cols):
-            if not self.game.is_column_full(board, col):
-                valid_locations.append(col)
-        return valid_locations
     
     def count_three(self, line):
-        if line == [0, 1, 1, 1] or line == [1, 1, 1, 0]:
+        if line.count(1) == 3:
             return -100
-        if line == [0, 2, 2, 2] or line == [2, 2, 2, 0]:
+        if line.count(2) == 3:
             return 10
         return 0
+    
     def count_four(self, line):
-        if line == [1, 1, 1, 1]:
+        if line.count(1) == 4:
             return -1000
-        if line == [2, 2, 2, 2]:
+        if line.count(2) == 4:
             return 1000
         return 0
