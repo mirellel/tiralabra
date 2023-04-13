@@ -18,7 +18,7 @@ class MultiPlayer:
         self.green_win = False
         self.red_win = False
         self.green_turn = True
-        self.red_turn = False
+        self.ai_player = False
 
     def run(self):
         '''Alustaa pelin pyörimisen'''
@@ -36,7 +36,7 @@ class MultiPlayer:
             self.check_events()
             self.game_ui.draw_board(self.board, self.game_over,
                                self.mouse_position, self.green_turn,
-                               self.green_win, self.red_win)
+                               self.green_win, self.red_win, self.ai_player)
 
 
     def check_events(self):
@@ -69,6 +69,8 @@ class MultiPlayer:
             if self.green_turn:
                 player = 1
                 self.green_turn = False
+                if self.ai_player == True:
+                    self.ai_turn = True
             else:
                 player = 2
                 self.green_turn = True
@@ -122,4 +124,3 @@ class MultiPlayer:
         self.green_win = False
         self.red_win = False
         self.green_turn = True
-        self.red_turn = False
