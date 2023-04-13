@@ -47,16 +47,15 @@ class TestMultiplayer(unittest.TestCase):
         self.game.mouse_position = (100, 700)
         self.game.green_turn = False
         self.game.green_win = False
-        self.game.red_turn = True
         self.game.red_win = False
 
         self.game.restart()
         self.assertEqual((self.game.board, self.game.running, self.game.game_over,
                           self.game.mouse_position,
                           self.game.green_turn, self.game.green_win,
-                          self.game.red_turn, self.game.red_win),
+                          self.game.red_win),
                           (self.empty_board, False, False, (0, 0),
-                           True, False, False, False))
+                           True, False, False))
 
     def test_get_empty_row(self):
         '''Testaa funktiota get_empty_row()'''
