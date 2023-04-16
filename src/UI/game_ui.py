@@ -18,8 +18,9 @@ class GameUI:
 
         self.green = (53, 240, 103)
         self.red = (240, 53, 53)
-        self.blue = (111, 163, 189)
+        self.black = (0, 0, 0)
         self.white = (255, 255, 255)
+        self.darkred = (153, 37, 37)
 
         pygame.font.init()
         self.font = pygame.font.SysFont("Arial", 40, 1)
@@ -35,7 +36,7 @@ class GameUI:
         self.screen.fill(self.white)
         for row in range(self.rows):
             for col in range(self.cols):
-                pygame.draw.rect(self.screen, self.blue, (col*self.square_size,
+                pygame.draw.rect(self.screen, self.black, (col*self.square_size,
                                                           row*self.square_size+self.square_size,
                                                           self.square_size, self.square_size))
                 pygame.draw.circle(self.screen, self.white, (col*self.square_size+
@@ -94,12 +95,12 @@ class GameUI:
         '''Funktio, joka ilmoittaa voitosta'''
         if green_win:
             text = self.font.render("Vihreä pelaaja voitti!",
-                                    True, (self.green))
+                                    True, (self.black))
         if red_win:
             text = self.font.render("Punainen pelaaja voitti!",
-                                    True, (self.red))
+                                    True, (self.black))
         restart_text = self.font.render("Paina r palataksesi Menuun", True,
-                                        self.blue)
-        self.screen.fill(self.white)
+                                        self.black)
+        self.screen.fill(self.darkred)
         self.screen.blit(text, (120, self.height/2))
         self.screen.blit(restart_text, (100, 400))
