@@ -30,7 +30,7 @@ class TestMinimax(unittest.TestCase):
         '''funktio palauttaa oikean arvon, kun
         suoralla on kolme kakkosta'''
         line = [0, 2, 2, 2]
-        self.assertEqual(10, self.minimax.count_three(line))
+        self.assertEqual(100, self.minimax.count_three(line))
 
     def test_count_four_ones(self):
         '''funktio palauttaa oikean arvon, kun
