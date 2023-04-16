@@ -71,37 +71,35 @@ class Minimax:
         n_board = np.array(board)
 
         '''Tarkistaa vaakatasoisen siirron arvon'''
-        for col in range(5, -1, -1):
-            row = board[col][:]
-            for x_row in range(6, 2, -1):
-                hor = [row[x_row-3], row[x_row-2], row[x_row-1], row[x_row]]
+        for row in range(self.game.rows):
+            r_array = [int(i) for i in list(n_board[row, :])]
+            for col in range(self.game.cols -3):
+                hor = r_array[col:col+4]
                 if self.count_four(hor) != 0:
                     return self.count_four(hor)
                 value += self.count_three(hor)
 
         '''Tarkistaa pystysuuntaisen siirron arvon'''
-        for row in order:
-            col = n_board[:, row]
-            for y_col in range(5, 2, -1):
-                vert = [col[y_col-3], col[y_col-2], col[y_col-1], col[y_col]]
+        for col in range(self.game.cols):
+            c_array = [int(i) for i in list(n_board[:, col])]
+            for row in range(self.game.rows-3):
+                vert = c_array[row:row+4]
                 if self.count_four(vert) != 0:
                     return self.count_four(vert)
                 value += self.count_three(vert)
 
         '''Tarkistaa ylöspäin viistoon olevan siirron arvon'''
-        for col in range(5,2,-1):
-            for row in range(3,-1,-1):
-                up_diagonal = [board[col][row],board[col-1][row+1],
-                            board[col-2][row+2],board[col-3][row+3]]
+        for row in range(self.game.rows-3):
+            for col in range(self.game.cols-3):
+                up_diagonal = [n_board[row+i][col+i] for i in range(4)]
                 if self.count_four(up_diagonal) != 0:
                     return self.count_four(up_diagonal)
                 value += self.count_three(up_diagonal)
 
         '''Tarkistaa alaspäin viistoon olevan siirron arvon'''
-        for col in range(5,2,-1):
-            for row in range(3,7):
-                d_diagonal = [board[col-3][row-3], board[col-2][row-2],
-                        board[col-1][row-1], board[col][row]]
+        for row in range(self.game.rows-3):
+            for col in range(self.game.cols-3):
+                d_diagonal = [board[row+3-i][col+i] for i in range(4)]
                 if self.count_four(d_diagonal) != 0:
                     return self.count_four(d_diagonal)
                 value += self.count_three(d_diagonal)
@@ -114,7 +112,7 @@ class Minimax:
         if line.count(1) == 3:
             return -100
         if line.count(2) == 3:
-            return 10
+            return 100
         return 0
 
     def count_four(self, line):

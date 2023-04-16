@@ -13,6 +13,7 @@ class MultiPlayer:
         self.running = False
 
         self.game_over = False
+        self.tie_game = False
         self.mouse_position = (0,0)
 
         self.green_win = False
@@ -36,7 +37,8 @@ class MultiPlayer:
             self.check_events()
             self.game_ui.draw_board(self.board, self.game_over,
                                self.mouse_position, self.green_turn,
-                               self.green_win, self.red_win, self.ai_player)
+                               self.green_win, self.red_win, self.ai_player,
+                               self.tie_game)
 
 
     def check_events(self):
@@ -106,6 +108,7 @@ class MultiPlayer:
     def tie(self):
         '''Lopettaa pelin tasapelin sattuessa'''
         self.game_over = True
+        self.tie_game = True
 
     def get_empty_row(self, board, column):
         '''Hakee alimman vapaan rivin annetulta sarakkeelta'''

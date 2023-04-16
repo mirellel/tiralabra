@@ -23,7 +23,7 @@ class GameUI:
         self.darkred = (153, 37, 37)
 
         pygame.font.init()
-        self.font = pygame.font.SysFont("Arial", 40, 1)
+        self.font = pygame.font.SysFont("EB Garamond", 40)
 
     def setup(self):
         '''Funktio, joka määrittää pygame ikkunan ja sen otsikon'''
@@ -31,7 +31,7 @@ class GameUI:
         pygame.display.set_caption("CONNECT 4")
 
     def draw_board(self, board, game_over, mouse_position, green_turn,
-                   green_win, red_win, ai_player):
+                   green_win, red_win, ai_player, tie):
         '''Funktio, joka piirtää pelilaudan, joka koostuu neiliöistä ja ympyröistä.'''
         self.screen.fill(self.white)
         for row in range(self.rows):
@@ -63,7 +63,10 @@ class GameUI:
                                                                  self.radius)
 
         if game_over:
-            self.draw_victory(green_win, red_win)
+            if not tie:
+                self.draw_victory(green_win, red_win)
+            else:
+                self.draw_tie()
         if not game_over:
             self.draw_piece(mouse_position, green_turn, ai_player)
             pygame.display.flip()
@@ -98,6 +101,16 @@ class GameUI:
                                     True, (self.black))
         if red_win:
             text = self.font.render("Punainen pelaaja voitti!",
+                                    True, (self.black))
+        restart_text = self.font.render("Paina r palataksesi Menuun", True,
+                                        self.black)
+        self.screen.fill(self.darkred)
+        self.screen.blit(text, (120, self.height/2))
+        self.screen.blit(restart_text, (100, 400))
+
+    def draw_tie(self):
+        '''Funktio, joka ilmoittaa voitosta'''
+        text = self.font.render("Tasapeli!",
                                     True, (self.black))
         restart_text = self.font.render("Paina r palataksesi Menuun", True,
                                         self.black)
