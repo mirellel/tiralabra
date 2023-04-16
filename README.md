@@ -9,7 +9,7 @@ Projekti Helsingin yliopiston kurssille Tietorakenteet ja algoritmit 2023
 
 [Testausdokumentti](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/testausdokumentti.md)
 
-[Testausdokumentti](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/toteutusdokumentti.md)
+[Toteutusdokumentti](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/toteutusdokumentti.md)
 
 
 ### Viikkoraportit
