@@ -4,7 +4,7 @@
 Tällä viikolla työstin eniten minimaxin toimintaa, niin että algoritmi osaisi pelata sujuvasti ihmistä vastaan. 
 Sain algoritmin toimimaan ja peliin on kovakoodattu syvyydeksi 2, joten pelin voittaminen on ihmiseltä todella helppoa.
 Kirjoitin algoritmille muutamia testejä, joissa testataan että algoritmi osaa puolustaa mahdollista ihmisen voittoa sekä 
-tehdä voittosiirron, kun siihen on jokin mahdollisuus. Kirjoitin testejä myös SinglePlayer luokalle, joka vastaa yksinpelin toiminnasta.
+tehdä tietyssä tilanteessa itselleen parhaimman siirron. Kirjoitin testejä myös SinglePlayer luokalle, joka vastaa yksinpelin toiminnasta.
 Tein myös käyttöliittymään joitakin muutoksia.
 
 ### Ajankäyttö
