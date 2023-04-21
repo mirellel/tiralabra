@@ -12,19 +12,23 @@ class SinglePlayer(MultiPlayer):
 
     def ai_move(self):
         '''Suorittaa tekoälyn siirron'''
-        row, col = self.minimax.best_move(self.board, self.depth)
-        self.board[row][col] =2
-        self.green_turn = True
+        if not self.green_turn and not self.game_over:
+            col, value = self.minimax.minimax(self.game.board, self.depth, True)
+            if not self.game.is_column_full(self.game.board, col):
+                row = self.get_empty_row(self.game.board, col)
+                self.drop_piece(self.game.board, row, col, 2)
+
+                self.green_turn = True
 
     def handle_player_move(self, column):
         '''Suorittaa pelaajan antaman siirron ja
         palauttaa siirron jälkeisen pelilaudan'''
         if not self.full_column(column):
-            row = self.get_empty_row(self.board, column)
+            row = self.get_empty_row(self.game.board, column)
             if self.green_turn:
                 player = 1
                 self.green_turn = False
-                self.drop_piece(self.board, row, column, player)
+                self.drop_piece(self.game.board, row, column, player)
 
                 self.check_victory()
                 self.check_tie()
@@ -32,4 +36,4 @@ class SinglePlayer(MultiPlayer):
 
             self.check_victory()
             self.check_tie()
-        return self.board
+        return self.game.board

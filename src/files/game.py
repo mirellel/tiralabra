@@ -1,10 +1,7 @@
 ''''Moduuli, joka sisältää pelilogiikasta vastaavan luokan MainGame'''
-import numpy as np
-
 class MainGame():
     '''Luokka joka vastaa pelilogiikasta'''
     def __init__(self):
-
 
         self.rows = 6
         self.cols = 7
@@ -46,10 +43,10 @@ class MainGame():
 
     def check_horizontal_win(self, board):
         '''Tarkistaa neljän suoran vaakasuunnasta'''
-        for col  in range(5, -1, -1):
-            row = board[col][:]
-            for row_x in range(6, 2, -1):
-                horizontal = [row[row_x-3], row[row_x-2], row[row_x-1], row[row_x]]
+        for col  in range(self.cols - 3):
+            for row in range(self.rows):
+                horizontal = [board[row][col], board[row][col+1],
+                              board[row][col+2], board[row][col+3]]
                 if self.check_if_four(horizontal) == 2:
                     return 2
                 if self.check_if_four(horizontal) == 1:
@@ -58,41 +55,38 @@ class MainGame():
 
     def check_vertical_win(self, board):
         '''Tarkistaa neljän suoran pystysuunnasta'''
-        n_board = np.array(board)
-        for piece in self.top_order:
-            column = n_board[:, piece]
-            for col in range(5, 2, -1):
-                vertical = [column[col-3], column[col-2], column[col-1], column[col]]
+        for col in range(self.cols):
+            for row in range(self.rows - 3):
+                vertical = [board[row][col], board[row+1][col],
+                            board[row+2][col], board[row+3][col]]
                 if self.check_if_four(vertical) == 2:
                     return 2
                 if self.check_if_four(vertical) == 1:
                     return 1
-
         return 0
 
-    def check_diagonal_up(self, board):
+    def check_pos_diagonal(self, board):
         '''Tarkistaa neljän suoran yläviistoon'''
-        for col in range(5, 2, -1):
-            for row in range(3, -1, -1):
-                up_diagonal = [board[col][row], board[col-1][row+1],
-                               board[col-2][row+2], board[col-3][row+3]]
-
-                if self.check_if_four(up_diagonal) == 2:
+        for col in range(self.cols - 3):
+            for row in range(self.rows - 3):
+                pos_diag = [board[row][col], board[row+1][col+1],
+                            board[row+2][col+2], board[row+3][col+3]]
+                if self.check_if_four(pos_diag) == 2:
                     return 2
-                if self.check_if_four(up_diagonal) == 1:
+                if self.check_if_four(pos_diag) == 1:
                     return 1
         return 0
+        
 
-    def check_diagonal_down(self, board):
+    def check_neg_diagonal(self, board):
         '''Tarkastaa neljän suoran alaviistoon'''
-        for col in range(5, 2, -1):
-            for row in range(3, 7):
-                down_diagonal = [board[col-3][row-3], board[col-2][row-2],
-                                 board[col-1][row-1], board[col][row]]
-
-                if self.check_if_four(down_diagonal) == 2:
+        for col in range(self.cols - 3):
+            for row in range(3, self.rows):
+                neg_diag = [board[row][col], board[row-1][col+1],
+                            board[row-2][col+2], board[row-3][col+3]]
+                if self.check_if_four(neg_diag) == 2:
                     return 2
-                if self.check_if_four(down_diagonal) == 1:
+                if self.check_if_four(neg_diag) == 1:
                     return 1
         return 0
 
@@ -102,11 +96,11 @@ class MainGame():
         Palauttaa 0, jos ei voittoaS'''
         horizontal = self.check_horizontal_win(board)
         vertical = self.check_vertical_win(board)
-        down_diagonal = self.check_diagonal_down(board)
-        up_diagonal = self.check_diagonal_up(board)
+        down_diagonal = self.check_neg_diagonal(board)
+        up_diagonal = self.check_pos_diagonal(board)
         if horizontal == 1 or vertical == 1 or down_diagonal == 1 or up_diagonal == 1:
             return 1
-        if horizontal == 2 or vertical == 2 or down_diagonal == 2 or up_diagonal ==2:
+        if horizontal == 2 or vertical == 2 or down_diagonal == 2 or up_diagonal == 2:
             return 2
         return 0
 
