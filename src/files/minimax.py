@@ -1,9 +1,9 @@
 '''Moduuli, joka sisältää minimax-algoritmin suorittavan luokan Minimax'''
+import random
+from math import inf
 import numpy as np
 from files.game import MainGame
 order = [3, 2, 4, 1, 5, 0, 6]
-inf = 10000000
-
 
 class Minimax:
     """Luokka joka toteuttaa minimax algoritmin ja pelaa
@@ -12,15 +12,17 @@ class Minimax:
     def __init__(self):
         '''Alustaa luokan attributit'''
         self.game = MainGame()
+        self.max_score = 1000000000000
+        self.min_score = -100000000000
 
     def minimax(self, board, depth, max_player, alpha=-inf, beta=inf):
         '''Funktio, joka sisältää minimax-algoritmin'''
 
         winner = self.check_win(board)
         if winner == 2:
-            return (None, 100000)
+            return (None, self.max_score)
         if winner == 1:
-             return (None, -100000)
+            return (None, self.min_score)
 
         if depth == 0:
             return (None, self.score(board, 2))
@@ -29,7 +31,9 @@ class Minimax:
             return (None, 0)
 
         if max_player:
-            max_value = int(-inf)
+            max_value = -inf
+            column = random.choice([i for i in range(self.game.cols)
+                                    if not self.game.is_column_full(board, i)])
             for col in order:
                 row = self.game.get_empty_row(board, col)
                 if row == -1:
@@ -46,7 +50,9 @@ class Minimax:
             return (column, max_value)
 
         else:
-            min_value = int(inf)
+            min_value = inf
+            column = random.choice([i for i in range(self.game.cols)
+                                    if not self.game.is_column_full(board, i)])
             for col in order:
                 row = self.game.get_empty_row(board, col)
                 if row == -1:
@@ -61,8 +67,9 @@ class Minimax:
                 if alpha >= beta:
                     break
             return (column, min_value)
-        
+
     def check_win(self, board):
+        '''Funktio, joka tarkastaa voiton'''
         return self.game.check_win(board)
 
     def score(self, board, piece):
@@ -102,6 +109,8 @@ class Minimax:
         return value
 
     def rate_possible_move(self, possible_move, piece):
+        '''Funktio, joka laskee mahdolliselle siirrolle
+        heuristisen arvon'''
         score = 0
         self.opponent = 1
         if possible_move.count(piece) == 4:
