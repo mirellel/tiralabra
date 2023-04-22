@@ -30,6 +30,8 @@ class TestSinglePlayer(unittest.TestCase):
                            [0, 0, 0, 0, 0, 0, 0],
                            [0, 0, 0, 0, 0, 0, 0],
                            [0, 0, 0, 0, 0, 0, 0]]
+        self.game.green_turn = False
+        self.game.game_over = False
         self.game.ai_move()
         board_after_move = [[0, 0, 1, 2, 0, 0, 0],
                             [0, 0, 0, 0, 0, 0, 0],

@@ -160,26 +160,26 @@ class TestGame(unittest.TestCase):
         returns_0 = self.game.check_vertical_win(board)
         self.assertEqual(returns_0, 0)
 
-    def test_diagonal_win_upwards_for_player_2(self):
+    def test_diagonal_win_right_for_player_2(self):
         '''Testaa voiton yläviistoon pelaajalle 2'''
-        board = [[0, 0, 0, 0, 0, 0, 0],
+        board = [[1, 2, 1, 1, 2, 2, 1],
+                 [0, 1, 2, 2, 1, 0, 0],
+                 [0, 0, 0, 2, 1, 0, 0],
+                 [0, 0, 0, 0, 2, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 2, 0, 0, 0],
-                 [0, 2, 2, 1, 1, 2, 0],
-                 [1, 2, 1, 1, 2, 1, 0],
-                 [2, 2, 1, 2, 2, 1, 0]]
-        returns_2 = self.game.check_diagonal_up(board)
+                 [0, 0, 0, 0, 0, 0, 0]]
+        returns_2 = self.game.check_pos_diagonal(board)
         self.assertEqual(returns_2, 2)
 
-    def test_diagonal_win_upwards_for_player_1(self):
+    def test_diagonal_win_right_for_player_1(self):
         '''Testaa voiton yläviistoon pelaajalle 1'''
-        board = [[0, 0, 0, 0, 0, 0, 0],
+        board = [[1, 2, 1, 1, 2, 2, 1],
+                 [0, 1, 0, 1, 1, 2, 0],
+                 [0, 0, 0, 0, 1, 2, 0],
+                 [0, 0, 0, 0, 0, 1, 0],
                  [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 1, 0, 0],
-                 [0, 2, 2, 1, 1, 2, 0],
-                 [1, 2, 1, 1, 2, 1, 0],
-                 [2, 1, 1, 2, 2, 1, 0]]
-        returns_1 = self.game.check_diagonal_up(board)
+                 [0, 0, 0, 0, 0, 0, 0]]
+        returns_1 = self.game.check_pos_diagonal(board)
         self.assertEqual(returns_1, 1)
 
     def test_diagonal_win_upwards_when_no_win(self):
@@ -191,32 +191,32 @@ class TestGame(unittest.TestCase):
                  [0, 2, 2, 1, 1, 2, 0],
                  [1, 2, 1, 1, 2, 1, 0],
                  [2, 1, 1, 2, 2, 1, 0]]
-        returns_0 = self.game.check_diagonal_up(board)
+        returns_0 = self.game.check_pos_diagonal(board)
         self.assertEqual(returns_0, 0)
 
-    def test_diagonal_win_downwards_for_player_2(self):
+    def test_diagonal_win_left_for_player_2(self):
         '''Testaa voiton alaviistoon pelaajalle 2'''
-        board = [[0, 0, 0, 0, 0, 0, 0],
+        board = [[1, 2, 1, 1, 2, 2, 1],
+                 [0, 1, 1, 2, 0, 0, 0],
+                 [0, 2, 2, 0, 0, 0, 0],
+                 [0, 2, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0],
-                 [0, 2, 0, 2, 0, 0, 0],
-                 [0, 1, 2, 1, 1, 2, 0],
-                 [1, 1, 1, 2, 2, 1, 0],
-                 [2, 2, 1, 2, 2, 1, 0]]
-        returns_2 = self.game.check_diagonal_down(board)
+                 [0, 0, 0, 0, 0, 0, 0]]
+        returns_2 = self.game.check_neg_diagonal(board)
         self.assertEqual(returns_2, 2)
 
-    def test_diagonal_win_downwards_for_player_1(self):
+    def test_diagonal_win_left_for_player_1(self):
         '''Testaa voiton alaviistoon pelaajalle 1'''
-        board = [[0, 0, 0, 0, 0, 0, 0],
+        board = [[1, 2, 1, 1, 2, 2, 1],
+                 [0, 0, 1, 0, 0, 0, 0],
+                 [0, 1, 0, 0, 0, 0, 0],
+                 [1, 0, 0, 0, 0, 0, 0],
                  [0, 0, 0, 0, 0, 0, 0],
-                 [1, 0, 0, 2, 0, 0, 0],
-                 [2, 1, 2, 1, 1, 2, 0],
-                 [1, 1, 1, 2, 2, 1, 0],
-                 [2, 2, 1, 1, 2, 1, 0]]
-        returns_1 = self.game.check_diagonal_down(board)
+                 [0, 0, 0, 0, 0, 0, 0]]
+        returns_1 = self.game.check_neg_diagonal(board)
         self.assertEqual(returns_1, 1)
 
-    def test_diagonal_win_downwards_when_no_win(self):
+    def test_diagonal_win_left_when_no_win(self):
         '''Testaa, että funktio palauttaa 0,
         tilanteessa, jossa ei voittoa'''
         board = [[0, 0, 0, 0, 0, 0, 0],
@@ -225,7 +225,7 @@ class TestGame(unittest.TestCase):
                  [2, 1, 2, 1, 1, 2, 0],
                  [1, 1, 1, 2, 2, 1, 0],
                  [2, 2, 1, 1, 2, 1, 0]]
-        returns_0 = self.game.check_diagonal_down(board)
+        returns_0 = self.game.check_neg_diagonal(board)
         self.assertEqual(returns_0, 0)
 
     def test_win_for_player_2(self):
