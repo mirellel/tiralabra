@@ -2,6 +2,7 @@
 import unittest
 import os
 from files.minimax import Minimax
+from files.two_player import MultiPlayer
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 class TestMinimax(unittest.TestCase):
@@ -9,88 +10,88 @@ class TestMinimax(unittest.TestCase):
     def setUp(self):
         '''Alustaa attribuutit'''
         self.board = [[0, 1, 2, 2, 1, 0, 0],
-                     [0, 1, 1, 2, 1, 0, 0],
-                     [0, 0, 1, 1, 2, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0]]
+                      [0, 1, 1, 2, 1, 0, 0],
+                      [0, 0, 1, 1, 2, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0]]
         self.minimax = Minimax()
+        self.game = MultiPlayer()
+    def test_rate_possible_move_for_player2_two(self):
+        '''Testaa palauttaako rate_possible_move
+        oikean arvon, kun siirrossa on kaksi kakkosta'''
+        possible_move = [2, 2, 0, 0]
+        piece = 2
+        score = self.minimax.rate_possible_move(possible_move, piece)
+        correct_score = 4
+        self.assertEqual(score, correct_score)
 
-    def test_best_move(self):
-        '''Algortimi osaa sijoittaa parhaimman siirron'''
-        board = ([[0, 1, 2, 2, 1, 0, 0],
-                     [0, 1, 1, 2, 1, 0, 0],
-                     [0, 0, 1, 2, 2, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0],
-                     [0, 0, 0, 0, 0, 0, 0]])
-        self.assertEqual((3, 3), self.minimax.best_move(board, 1))
+    def test_rate_possible_move_for_player2_three(self):
+        '''Testaa palauttaako rate_possible_move
+        oikean arvon, kun siirrossa on kolme kakkosta'''
+        possible_move = [2, 2, 2, 0]
+        piece = 2
+        score = self.minimax.rate_possible_move(possible_move, piece)
+        correct_score = 10
+        self.assertEqual(score, correct_score)
 
-    def test_count_three_twos(self):
-        '''funktio palauttaa oikean arvon, kun
-        suoralla on kolme kakkosta'''
-        line = [0, 2, 2, 2]
-        self.assertEqual(100, self.minimax.count_three(line))
+    def test_rate_possible_move_for_player2_four(self):
+        '''Testaa palauttaako rate_possible_move
+        oikean arvon, kun siirrossa on neljä kakkosta'''
+        possible_move = [2, 2, 2, 2]
+        piece = 2
+        score = self.minimax.rate_possible_move(possible_move, piece)
+        correct_score = 10
+        self.assertEqual(score, correct_score)
 
-    def test_count_four_ones(self):
-        '''funktio palauttaa oikean arvon, kun
-        suoralla on kolme ykköstä'''
-        line = [1, 1, 1, 1]
-        self.assertEqual(-1000, self.minimax.count_four(line))
+    def test_rate_possible_move_for_player1_two(self):
+        '''Testaa palauttaako rate_possible_move
+        oikean arvon, kun siirrossa on kaksi ykköstä'''
+        possible_move = [1, 1, 0, 0]
+        piece = 2
+        score = self.minimax.rate_possible_move(possible_move, piece)
+        correct_score = -4
+        self.assertEqual(score, correct_score)
 
-    def test_score_diag_d_four(self):
-        '''funktio palauttaa oikean arvon, kun
-        alaspäin viistoon olevalla suoralla on
-        neljä ykköstä'''
-        board = [[1, 1, 2, 2, 1, 0, 0],
-                 [0, 1, 2, 2, 1, 0, 0],
-                 [0, 0, 1, 1, 0, 0, 0],
-                 [0, 0, 0, 1, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0]]
-        self.assertEqual(self.minimax.score(board), -1000)
+    def test_rate_possible_move_for_player1_three(self):
+        '''Testaa palauttaako rate_possible_move
+        oikean arvon, kun siirrossa on kolme ykköstä'''
+        possible_move = [1, 1, 1, 0]
+        piece = 2
+        score = self.minimax.rate_possible_move(possible_move, piece)
+        correct_score = -10
+        self.assertEqual(score, correct_score)
 
-    def test_score_diag_u_four(self):
-        '''funktio palauttaa oikean arvon, kun
-        alaspäin viistoon olevalla suoralla on
-        neljä kakkosta'''
-        board = [[1, 1, 2, 2, 1, 0, 0],
-                 [0, 0, 2, 2, 1, 0, 0],
-                 [0, 2, 1, 1, 0, 0, 0],
-                 [2, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0]]
-        self.assertEqual(self.minimax.score(board), 1000)
+    def test_defend_possible_defeat(self):
+        '''Tetsaa löytääkö algoritmi parhaan siirron,
+        kun vastustajalla on kolmen suora'''
+        board = self.board
+        column = self.minimax.minimax(board, 2, True)[0]
+        self.assertEqual(column, 4)
 
-    def test_score_hor_four(self):
-        '''funktio palauttaa oikean arvon, kun
-        vaakatasoisella suoralla on neljä kakkosta'''
-        board = [[1, 1, 2, 2, 1, 0, 0],
-                 [0, 2, 2, 2, 2, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0]]
-        self.assertEqual(self.minimax.score(board), 1000)
+    def test_defend_when_opponent_wins_in_two_moves(self):
+        '''Testaa löytääkö algoritmi parhaan siirron,
+        kun vastustajalla on kahden suora'''
+        self.board = [[1, 1, 2, 1, 2, 1, 1],
+                      [0, 2, 0, 2, 1, 2, 0],
+                      [0, 0, 0, 2, 1, 0, 0],
+                      [0, 0, 0, 1, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0]]
+        depth = 2
+        col = self.minimax.minimax(self.board, depth, True)[0]
+        self.assertEqual(col, 4)
 
-    def test_score_vert_four(self):
-        '''funktio palauttaa oikean arvon, kun
-        pystytasoisella suoralla on neljä ykköstä'''
-        board = [[1, 1, 2, 2, 1, 0, 0],
-                 [0, 1, 2, 0, 2, 0, 0],
-                 [0, 1, 0, 0, 0, 0, 0],
-                 [0, 1, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0]]
-        self.assertEqual(self.minimax.score(board), -1000)
-
-    def test_block_winning(self):
-        '''algoritmi osaa blokata pelaajan 1 mahdollisen
-        voiton'''
-        board = [[0, 1, 2, 2, 1, 0, 0],
-                 [0, 1, 1, 2, 1, 0, 0],
-                 [0, 0, 1, 1, 2, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0],
-                 [0, 0, 0, 0, 0, 0, 0]]
-        self.assertEqual((3,4), self.minimax.best_move(board, 2))
+    def test_find_win_in_two_moves(self):
+        '''Testaa löytääkö algoritmi voittavan
+        siirron syvyydellä 2 kun voitto on
+        kahden siirron päässä'''
+        self.board = [[1, 1, 2, 1, 2, 1, 1],
+                      [0, 2, 0, 2, 0, 0, 0],
+                      [0, 0, 0, 2, 0, 0, 0],
+                      [0, 0, 0, 1, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0]]
+        depth = 2
+        col = self.minimax.minimax(self.board, depth, True)[0]
+        self.assertEqual(col, 2)
