@@ -20,10 +20,9 @@ class MainGame():
         '''Tarkistaa onko pelilauta täynnä ja palauttaa tiedon boolaen arvona
         Pelilaudan ollessa täynnä pelin tulos on tasapeli'''
         full = True
-        for column in range(0, 7):
+        for column in range(self.cols):
             if not self.is_column_full(board, column):
                 full = False
-
         return full
 
     def is_column_full(self, board, column):
@@ -76,7 +75,6 @@ class MainGame():
                 if self.check_if_four(pos_diag) == 1:
                     return 1
         return 0
-        
 
     def check_neg_diagonal(self, board):
         '''Tarkastaa neljän suoran alaviistoon'''

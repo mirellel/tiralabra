@@ -10,7 +10,7 @@ class MultiPlayer:
         self.game_ui = GameUI()
         self.game = MainGame()
         self.running = False
-
+        self.board = [[0 for x in range(7)] for y in range(6)]
         self.game_over = False
         self.tie_game = False
         self.mouse_position = (0,0)
@@ -34,7 +34,7 @@ class MultiPlayer:
         ollessa käynnissä'''
         while self.running:
             self.check_events()
-            self.game_ui.draw_board(self.game.board, self.game_over,
+            self.game_ui.draw_board(self.board, self.game_over,
                                self.mouse_position, self.green_turn,
                                self.green_win, self.red_win, self.ai_player,
                                self.tie_game)
@@ -65,8 +65,8 @@ class MultiPlayer:
     def handle_player_move(self, column):
         '''Suorittaa pelaajan antaman siirron ja
         palauttaa siirron jälkeisen pelilaudan'''
-        if not self.full_column(column):
-            row = self.get_empty_row(self.game.board, column)
+        if not self.full_column(column, self.board):
+            row = self.get_empty_row(self.board, column)
             if self.green_turn:
                 player = 1
                 self.green_turn = False
@@ -75,22 +75,23 @@ class MultiPlayer:
             else:
                 player = 2
                 self.green_turn = True
-            self.drop_piece(self.game.board, row, column, player)
+            self.drop_piece(self.board, row, column, player)
             self.check_victory()
-        return self.game.board
+            self.check_tie(self.board)
+        return self.board
 
     def drop_piece(self, board, row, column, player):
         '''Päivittää pelilautaan annetun pelaajan siirron'''
         board[row][column] = player
+        self.game.board[row][column] = player
 
-    def full_column(self, column):
+    def full_column(self, column, board):
         '''Tarkastaa onko annettu sarake täynnä'''
-        return self.game.is_column_full(self.game.board, column)
-
+        return self.game.is_column_full(board, column)
 
     def check_victory(self):
         '''Tarkastaa onko pelilaudalla voittoa'''
-        result = self.game.check_win(self.game.board)
+        result = self.game.check_win(self.board)
         if result == 1:
             self.green_win = True
             self.end_game()
@@ -99,14 +100,14 @@ class MultiPlayer:
             self.end_game()
         return result
 
-    def check_tie(self):
+    def check_tie(self, board):
         '''Tarkastaa onko pelilaudalla tasapeliä'''
-        if self.game.is_board_full(self.game.board):
+        if self.game.is_board_full(board):
             self.tie()
 
     def tie(self):
         '''Lopettaa pelin tasapelin sattuessa'''
-        self.game_over = True
+        self.end_game()
         self.tie_game = True
 
     def get_empty_row(self, board, column):
@@ -117,7 +118,7 @@ class MultiPlayer:
     def restart(self):
         '''Asettaa pelin attribuutit aloitustilaan
         ja tyhjentää pelilaudan'''
-        self.game.board = [[0 for x in range(7)] for y in range(6)]
+        self.board = [[0 for x in range(7)] for y in range(6)]
         self.running = False
 
         self.game_over = False
@@ -128,6 +129,5 @@ class MultiPlayer:
         self.green_turn = True
 
     def end_game(self):
+        '''Asettaa game_over arvoksi True'''
         self.game_over = True
-        
-
