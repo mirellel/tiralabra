@@ -21,3 +21,4 @@ Projekti Helsingin yliopiston kurssille Tietorakenteet ja algoritmit 2023
 
 [Viikko 4](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/viikkoraportit/viikko4.md)
 
+[Viikko 5](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/viikkoraportit/viikko5.md)
