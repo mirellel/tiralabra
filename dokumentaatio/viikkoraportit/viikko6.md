@@ -1,7 +1,7 @@
 ## Viikkoraportti 6
 
 ### Mitä tein?
-Projekti ei edistynyt tällä viikolla. Minulle ei jäänyt aikaa tehdä muu kuin vertaisarviointi 2 tällä viikolla.
+Projekti ei edistynyt tällä viikolla. Minulle ei jäänyt aikaa tehdä muu kuin vertaisarviointi 2.
 
 ### Ajankäyttö
 Käytin aikaa noin tunnin
