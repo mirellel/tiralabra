@@ -1,29 +1,16 @@
-'''Moduuli, joka sisältää luokan SinglePlayer'''
+'''Moduuli, johon kuuluu pelistä vastaava luokka MultiPlayer'''
 import pygame
-from UI.game_ui import GameUI
 from files.game_runner import Game
-from files.minimax import Minimax
+from UI.game_ui import GameUI
 
-class SinglePlayer():
-    '''Luokka, joka vastaa pelistä teköälyä vastaan'''
-    def __init__(self, depth):
+class MultiPlayer:
+    '''Luokka, joka vastaa kahden pelaajan välisestä pelistä'''
+    def __init__(self):
+        '''Alustaa luokan attribuutit'''
         self.game = Game()
         self.game_ui = GameUI()
-        self.minimax = Minimax()
-        self.depth = depth
-        self.game.ai_player = True
-
-        if self.depth == 2:
-            self.game.opponent = "jacob"
-            self.game.depth = 2
-        if self.depth == 4:
-            self.game.opponent = "bella"
-            self.game.depth = 4
-        if self.depth == 6:
-            self.game.opponent = "edward"
-            self.game.depth = 6
-
-        self.mouse_position = (0, 0)
+        self.mouse_position = (0,0)
+        self.game.opponent = "player"
 
     def run(self):
         '''Alustaa pelin pyörimisen'''
@@ -43,7 +30,6 @@ class SinglePlayer():
                                self.mouse_position, self.game.green_turn,
                                self.game.green_win, self.game.red_win, self.game.ai_player,
                                self.game.game_tie, self.game.opponent)
-
     def check_events(self):
         '''Tarkastaa pygametapahtumat ja kutstuu
         tarvitavat funktiot suorittamaan loogiset siirrot'''
@@ -56,7 +42,6 @@ class SinglePlayer():
                     x_position = position[0]
                     col = x_position // 100
                     self.game.handle_player_move(col)
-                    self.game.handle_ai_move()
 
             if event.type == pygame.MOUSEMOTION:
                 self.mouse_position = pygame.mouse.get_pos()
