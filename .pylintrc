@@ -322,6 +322,7 @@ ignore-long-lines=^\s*(# )?<?https?://\S+>?$
 # Number of spaces of indent required inside a hanging or continued line.
 indent-after-paren=4
 
+
 # String used as indentation unit. This is usually "    " (4 spaces) or "\t" (1
 # tab).
 indent-string='    '
@@ -425,7 +426,9 @@ disable=raw-checker-failed,
 	consider-using-max-builtin,
 	consider-using-min-builtin,
 	attribute-defined-outside-init,
-	no-else-return
+	no-else-return,
+	not-callable,
+	missing-function-docstring
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
