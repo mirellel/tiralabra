@@ -1,13 +1,18 @@
 '''Moduuli, joka sisältää Menusta huolehtivan luokan Menu'''
 import pygame
-from files.two_player import MultiPlayer
 from files.singleplayer import SinglePlayer
+from files.multiplayer import MultiPlayer
 from UI.menu_ui import MenuUI
+
+easy = 2
+medium = 4
+hard = 6
 
 class Menu:
     '''Funktio, joka vastaa aloitusmenun logiikasta'''
     def __init__(self):
         self.menu_ui = MenuUI()
+        self.clicked = False
 
     def run_menu(self):
         '''Pyörittää menua'''
@@ -28,7 +33,10 @@ class Menu:
 
     def draw_screen(self):
         '''Funktio kutsuu UI:n samannimistä funktiota piirtämään ruudun'''
-        self.menu_ui.draw_screen()
+        if self.clicked:
+            self.menu_ui.draw_screen_clicked()
+        else:
+            self.menu_ui.draw_screen_not_clicked()
 
     def menu_loop(self):
         '''Kutsuu funktioita, jotka piirtävät ruudut ja
@@ -42,6 +50,16 @@ class Menu:
         if self.menu_ui.two_player_button.collidepoint(position):
             two_player_game = MultiPlayer()
             two_player_game.run()
-        if self.menu_ui.singleplayer_button.collidepoint(position):
-            singleplayer_game = SinglePlayer()
-            singleplayer_game.run()
+        if not self.clicked:
+            if self.menu_ui.singleplayer_button.collidepoint(position):
+                self.clicked = True
+        else:
+            if self.menu_ui.easy_button.collidepoint(position):
+                singleplayer_game = SinglePlayer(easy)
+                singleplayer_game.run()
+            if self.menu_ui.medium_button.collidepoint(position):
+                singleplayer_game = SinglePlayer(medium)
+                singleplayer_game.run()
+            if self.menu_ui.hard_button.collidepoint(position):
+                singleplayer_game = SinglePlayer(hard)
+                singleplayer_game.run()

@@ -1,8 +1,7 @@
 '''Moduuli, joka sisältää minimax-algoritmin suorittavan luokan Minimax'''
-import random
 from math import inf
 import numpy as np
-from files.game import MainGame
+from files.game_logic import MainGame
 order = [3, 2, 4, 1, 5, 0, 6]
 
 class Minimax:
@@ -19,21 +18,20 @@ class Minimax:
         '''Funktio, joka sisältää minimax-algoritmin'''
 
         winner = self.check_win(board)
-        if winner == 2:
-            return (None, self.max_score)
-        if winner == 1:
-            return (None, self.min_score)
 
-        if depth == 0:
-            return (None, self.score(board, 2))
+        if depth == 0 or winner > 0:
+            if winner == 2:
+                return (None, self.max_score)
+            if winner == 1:
+                return (None, self.min_score)
+            else:
+                return (None, self.score(board, 2))
 
         if self.game.is_board_full(self.game.board):
             return (None, 0)
 
         if max_player:
             max_value = -inf
-            column = random.choice([i for i in range(self.game.cols)
-                                    if not self.game.is_column_full(board, i)])
             for col in order:
                 row = self.game.get_empty_row(board, col)
                 if row == -1:
@@ -51,8 +49,6 @@ class Minimax:
 
         else:
             min_value = inf
-            column = random.choice([i for i in range(self.game.cols)
-                                    if not self.game.is_column_full(board, i)])
             for col in order:
                 row = self.game.get_empty_row(board, col)
                 if row == -1:
