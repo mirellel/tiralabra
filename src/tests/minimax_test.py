@@ -2,7 +2,6 @@
 import unittest
 import os
 from files.minimax import Minimax
-from files.two_player import MultiPlayer
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 class TestMinimax(unittest.TestCase):
@@ -16,7 +15,6 @@ class TestMinimax(unittest.TestCase):
                       [0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0]]
         self.minimax = Minimax()
-        self.game = MultiPlayer()
     def test_rate_possible_move_for_player2_two(self):
         '''Testaa palauttaako rate_possible_move
         oikean arvon, kun siirrossa on kaksi kakkosta'''
@@ -82,16 +80,19 @@ class TestMinimax(unittest.TestCase):
         col = self.minimax.minimax(self.board, depth, True)[0]
         self.assertEqual(col, 4)
 
-    def test_find_win_in_two_moves(self):
+    def test_find_win_in_two_moves_depth_2(self):
         '''Testaa löytääkö algoritmi voittavan
         siirron syvyydellä 2 kun voitto on
         kahden siirron päässä'''
-        self.board = [[1, 1, 2, 1, 2, 1, 1],
-                      [0, 2, 0, 2, 0, 0, 0],
-                      [0, 0, 0, 2, 0, 0, 0],
-                      [0, 0, 0, 1, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0]]
+        self.board = [[1, 2, 2, 1, 1, 1, 2],
+                      [1, 0, 1, 2, 1, 0, 2],
+                      [1, 0, 2, 2, 2, 0, 2],
+                      [2, 0, 1, 1, 2, 0, 1],
+                      [2, 0, 1, 2, 2, 0, 2],
+                      [1, 0, 1, 2, 1, 0, 1]]
         depth = 2
         col = self.minimax.minimax(self.board, depth, True)[0]
-        self.assertEqual(col, 2)
+        # minimax käy sarakkeet läpi aina järjestyksessä 3, 2, 4, 1, 5, 0, 6
+        # joten algoritmi löytää parhaimman siirron sarakkeesta 1, vaikka
+        # siirto sarakkeeseen 5 on yhtä hyvä
+        self.assertEqual(col, 1)

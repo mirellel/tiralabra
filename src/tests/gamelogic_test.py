@@ -1,12 +1,12 @@
 '''Moduuli, joka sisältää testiluokan TestGame'''
 import unittest
 import os
-from files.game import MainGame
+from files.game_logic import MainGame
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
 class TestGame(unittest.TestCase):
-    '''Testiluokka game_logic tiedostossa oleville funktioille'''
+    '''Testiluokka MainGame luokalle'''
     def setUp(self):
         self.top_order = [3, 2, 4, 1, 5, 0, 6]
         self.game = MainGame()
