@@ -7,6 +7,9 @@ class MenuUI:
         self.screen = pygame.display.set_mode((700, 700))
         self.two_player_button = pygame.Rect(100, 200, 500, 150)
         self.singleplayer_button = pygame.Rect(100, 400, 500, 150)
+        self.easy_button = pygame.Rect(50, 400, 150, 120)
+        self.medium_button = pygame.Rect(270, 400, 170, 120)
+        self.hard_button = pygame.Rect(500, 400, 150, 120)
         '''Tarvittavia värejä ja fontti'''
         self.red = (153, 37, 37)
         self.black = (0, 0, 0)
@@ -28,20 +31,42 @@ class MenuUI:
         '''Funktio vastaa nappien piirtämisestä'''
         pygame.draw.rect(self.screen, color, button)
 
-    def draw_screen(self):
+    def draw_screen_not_clicked(self):
         '''Funktio, joka piirtää ruudun hyödyntäen
         draw_text() ja draw_button() funktioita'''
         mouse = pygame.mouse.get_pos()
+        buttons = [self.two_player_button, self.singleplayer_button]
         self.screen.fill(self.red)
+
+        for button in buttons:
+            self.draw_button(button, self.dark_grey)
+            if button.collidepoint(mouse):
+                self.draw_button(button, self.light_grey)
+
         self.draw_text("VALITSE VASTUSTAJASI:", 120, 100)
-
-        self.draw_button(self.two_player_button, self.dark_grey)
-        if self.two_player_button.collidepoint(mouse):
-            self.draw_button(self.two_player_button, self.light_grey)
         self.draw_text("KAVERI (2 PELAAJAA)", 150, 250)
+        self.draw_text("TIETOKONE", 150, 450)
+        pygame.display.flip()
 
-        self.draw_button(self.singleplayer_button, self.dark_grey)
-        if self.singleplayer_button.collidepoint(mouse):
-            self.draw_button(self.singleplayer_button, self.light_grey)
-        self.draw_text("TIETOKONE (HELPPO)", 150, 450)
+    def draw_screen_clicked(self):
+        '''Funktio, joka piirtää ruudun hyödyntäen
+        draw_text() ja draw_button() funktioita'''
+        mouse = pygame.mouse.get_pos()
+        buttons = [self.two_player_button, self.easy_button,
+                   self.medium_button, self.hard_button]
+        self.screen.fill(self.red)
+
+        for button in buttons:
+            self.draw_button(button, self.dark_grey)
+            if button.collidepoint(mouse):
+                self.draw_button(button, self.light_grey)
+
+        self.draw_text("VALITSE VASTUSTAJASI:", 120, 100)
+        self.draw_text("KAVERI (2 PELAAJAA)", 150, 250)
+        self.draw_text("Jacob", 80, 420)
+        self.draw_text("(helppo)", 60, 460)
+        self.draw_text("Bella", 310, 420)
+        self.draw_text("(keskitaso)", 275, 460)
+        self.draw_text("Edward", 515, 420)
+        self.draw_text("(vaikea)", 515, 460)
         pygame.display.flip()

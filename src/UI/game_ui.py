@@ -27,11 +27,11 @@ class GameUI:
 
     def setup(self):
         '''Funktio, joka määrittää pygame ikkunan ja sen otsikon'''
-        self.screen = pygame.display.set_mode((self.width, self.height))
+        self.screen = pygame.display.set_mode((self.width, self.height+150))
         pygame.display.set_caption("CONNECT 4")
 
     def draw_board(self, board, game_over, mouse_position, green_turn,
-                   green_win, red_win, ai_player, tie):
+                   green_win, red_win, ai_player, tie, opponent):
         '''Funktio, joka piirtää pelilaudan, joka koostuu neiliöistä ja ympyröistä.'''
         self.screen.fill(self.white)
         for row in range(self.rows):
@@ -61,12 +61,13 @@ class GameUI:
                                                                  (row*self.square_size+
                                                                   self.square_size//2)),
                                                                  self.radius)
-
+        if opponent != "player":
+            self.draw_opponent(opponent)
         if game_over:
-            if not tie:
-                self.draw_victory(green_win, red_win)
-            else:
+            if tie:
                 self.draw_tie()
+            else:
+                self.draw_victory(green_win, red_win)
         if not game_over:
             self.draw_piece(mouse_position, green_turn, ai_player)
             pygame.display.flip()
@@ -104,9 +105,8 @@ class GameUI:
                                     True, (self.black))
         restart_text = self.font.render("Paina r palataksesi Menuun", True,
                                         self.black)
-        self.screen.fill(self.darkred)
-        self.screen.blit(text, (120, self.height/2))
-        self.screen.blit(restart_text, (100, 400))
+        self.screen.blit(text, (120, 10))
+        self.screen.blit(restart_text, (100, 45))
 
     def draw_tie(self):
         '''Funktio, joka ilmoittaa voitosta'''
@@ -114,6 +114,9 @@ class GameUI:
                                     True, (self.black))
         restart_text = self.font.render("Paina r palataksesi Menuun", True,
                                         self.black)
-        self.screen.fill(self.darkred)
-        self.screen.blit(text, (120, self.height/2))
-        self.screen.blit(restart_text, (100, 400))
+        self.screen.blit(text, (120, 10))
+        self.screen.blit(restart_text, (100, 45))
+
+    def draw_opponent(self, opponent):
+        self.opponent = load_image(f"twilight_{opponent}.png")
+        self.screen.blit(self.opponent, (0, 700))
