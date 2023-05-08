@@ -63,6 +63,13 @@ class GameUI:
                                                                  self.radius)
         if opponent != "player":
             self.draw_opponent(opponent)
+            if not game_over:
+                self.draw_opponent_text(opponent)
+            else:
+                if red_win:
+                    self.draw_opponent__victory_text(opponent)
+                if green_win:
+                    self.draw_opponent__defeat_text(opponent)
         if game_over:
             if tie:
                 self.draw_tie()
@@ -120,3 +127,30 @@ class GameUI:
     def draw_opponent(self, opponent):
         self.opponent = load_image(f"twilight_{opponent}.png")
         self.screen.blit(self.opponent, (0, 700))
+
+    def draw_opponent_text(self, opponent):
+        if opponent == "jacob":
+            text =self.font.render(":  En anna sinun voittaa", True, (0, 0, 0))
+        if opponent == "bella":
+            text = self.font.render(":   *ugh* Tää peli on tylsä", True, (0, 0, 0))
+        if opponent == "edward":
+            text = self.font.render(":  *lukee mieltäsi*", True, (0, 0, 0))
+        self.screen.blit(text, (110, 750))
+    
+    def draw_opponent__victory_text(self, opponent):
+        if opponent == "jacob":
+            text =self.font.render(":  Hah! Voitin!", True, (0, 0, 0))
+        if opponent == "bella":
+            text = self.font.render(":   O-oho.. taisin voittaa", True, (0, 0, 0))
+        if opponent == "edward":
+            text = self.font.render(":  Alice näki, että voitan", True, (0, 0, 0))
+        self.screen.blit(text, (110, 750))
+
+    def draw_opponent__defeat_text(self, opponent):
+        if opponent == "jacob":
+            text =self.font.render(":  Vaadin uusintaottelua!", True, (0, 0, 0))
+        if opponent == "bella":
+            text = self.font.render(":   Vau.. Sinä voitit", True, (0, 0, 0))
+        if opponent == "edward":
+            text = self.font.render(":   Tämän ei olisi pitänyt tapahtua..", True, (0, 0, 0))
+        self.screen.blit(text, (110, 750))
