@@ -15,20 +15,35 @@ class Minimax:
         self.min_score = -100000000000
 
     def minimax(self, board, depth, max_player, alpha=-inf, beta=inf):
-        '''Funktio, joka sisältää minimax-algoritmin'''
+        '''Palauttaa parhaan mahdollisen siirron tietokone-pelaajalle
+        käyttäen minimax algoritmia  tehostettuna alpha-beta-karsinnalla
+        Muuttujat:
+            board (list): Listoitsta koostuva lista, joka kuvaa pelilautaa
+            depth (int): hakupuun syvyys
+            max_player (bool): Totuusarvo, joka kertoo onko tietokoneen vuoro tehdä siirto
+            alpha (int): Maksimi arvo löytyneiden siirtojen alarajalle
+            beta (int): Minimiarvo mahdollisten siirtojen ylärajalle
+        Palautusarvo:
+            column (int): sarake, johon siirto tehdään
+            max_value / min_value (int): Lukuarvo, joka kuvaa kuinka hyvä siirto on'''
 
         winner = self.check_win(board)
-
-        if depth == 0 or winner > 0:
-            if winner == 2:
-                return (None, self.max_score)
-            if winner == 1:
-                return (None, self.min_score)
-            else:
-                return (None, self.score(board, 2))
+        valid_locations = self.get_valid_locations(board)
 
         if self.game.is_board_full(self.game.board):
             return (None, 0)
+        
+        if not valid_locations:
+            return (None, 0)
+
+        if depth == 0 or winner > 0:
+            if winner > 0:
+                if winner == 2:
+                    return (None, self.max_score)
+                if winner == 1:
+                    return (None, self.min_score)
+            else:
+                return (None, self.score(board, 2))
 
         if max_player:
             max_value = -inf
@@ -120,3 +135,13 @@ class Minimax:
         if possible_move.count(self.opponent) == 2 and possible_move.count(0) == 2:
             score -= 4
         return score
+    
+    def get_valid_locations(self, board):
+        '''
+        Palauttaa listan mahdollisista sarakkeista, joihin voidaan tehdä siirto
+        '''
+        valid_locations = []
+        for col in range(7):
+            if not self.game.is_column_full(board, col):
+                valid_locations.append(col)
+        return valid_locations
