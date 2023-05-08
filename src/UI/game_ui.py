@@ -136,7 +136,7 @@ class GameUI:
         if opponent == "edward":
             text = self.font.render(":  *lukee mieltäsi*", True, (0, 0, 0))
         self.screen.blit(text, (110, 750))
-    
+
     def draw_opponent__victory_text(self, opponent):
         if opponent == "jacob":
             text =self.font.render(":  Hah! Voitin!", True, (0, 0, 0))
