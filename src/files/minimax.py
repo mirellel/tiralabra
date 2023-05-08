@@ -32,7 +32,7 @@ class Minimax:
 
         if self.game.is_board_full(self.game.board):
             return (None, 0)
-        
+
         if not valid_locations:
             return (None, 0)
 
@@ -105,16 +105,16 @@ class Minimax:
                 move = c_array[row:row+4]
                 value += self.rate_possible_move(move, piece)
 
-        '''Tarkistaa ylöspäin viistoon olevan siirron arvon'''
+        '''Tarkistaa oikealle viistoon olevan siirron arvon'''
         for row in range(self.game.rows-3):
             for col in range(self.game.cols-3):
                 move = [n_board[row+i][col+i] for i in range(4)]
                 value += self.rate_possible_move(move, piece)
 
-        '''Tarkistaa alaspäin viistoon olevan siirron arvon'''
+        '''Tarkistaa vasemmalle viistoon olevan siirron arvon'''
         for row in range(self.game.rows-3):
-            for col in range(self.game.cols-3):
-                move = [board[row+3-i][col+i] for i in range(4)]
+            for col in range(self.game.cols-3, 0, -1):
+                move = [board[row+i][col-i] for i in range(4)]
                 value += self.rate_possible_move(move, piece)
 
         return value
@@ -135,7 +135,7 @@ class Minimax:
         if possible_move.count(self.opponent) == 2 and possible_move.count(0) == 2:
             score -= 4
         return score
-    
+
     def get_valid_locations(self, board):
         '''
         Palauttaa listan mahdollisista sarakkeista, joihin voidaan tehdä siirto

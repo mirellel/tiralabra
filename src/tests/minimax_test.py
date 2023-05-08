@@ -96,3 +96,47 @@ class TestMinimax(unittest.TestCase):
         # joten algoritmi löytää parhaimman siirron sarakkeesta 1, vaikka
         # siirto sarakkeeseen 5 on yhtä hyvä
         self.assertEqual(col, 1)
+
+    def test_find_win_in_five_moves(self):
+        board = ([
+            [1, 1, 2, 1, 2, 0, 1],
+            [0, 0, 2, 2, 1, 0, 0],
+            [0, 0, 1, 2, 2, 0, 0],
+            [0, 0, 1, 2, 2, 0, 0],
+            [0, 0, 2, 1, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0]
+        ])
+        depth = 3
+        col = self.minimax.minimax(board, depth, True)[0]
+        self.assertEqual(col, 5)
+
+    def test_find_win_in_three_moves(self):
+        board = ([
+            [0, 1, 2, 1, 1, 1, 2],
+            [0, 1, 1, 2, 0, 1, 1],
+            [0, 2, 2, 2, 0, 2, 1],
+            [0, 0, 2, 1, 0, 2, 0],
+            [0, 0, 1, 2, 0, 1, 0],
+            [0, 0, 2, 2, 0, 0, 0]
+        ])
+        depth = 3
+        col = self.minimax.minimax(board, depth, True)[0]
+        self.assertEqual(col, 0)
+
+    def test_find_win_in_six_moves(self):
+        board = ([
+            [2, 0, 0, 2, 1, 2, 1],
+            [1, 0, 0, 1, 2, 1, 0],
+            [2, 0, 0, 2, 1, 2, 0],
+            [1, 0, 0, 2, 1, 1, 0],
+            [2, 0, 0, 2, 2, 0, 0],
+            [1, 0, 0, 1, 1, 0, 0]
+        ])
+        depth = 6
+        col = self.minimax.minimax(board, depth, True)[0]
+        self.assertEqual(col, 2)
+
+    def test_get_valid_locations(self):
+        board = self.board
+        valid_locations = self.minimax.get_valid_locations(board)
+        self.assertEqual(valid_locations, [0, 1, 2, 3, 4, 5, 6])
