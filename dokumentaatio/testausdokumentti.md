@@ -20,7 +20,7 @@ Testikattavuuden ulkopuolelle jää pelin ja menun UI:sta huolehtivat luokat, jo
 Testit ovat tehty Unittest-yksikkötesteillä ja ne testaavat pelilogiikkaa, pelin pyörimistä ja toimintaa (siirron tekeminen, uudelleen aloitus, voitontarkastus yms.) sekä minimax-algoritmin toimintaa.
 
 #### Pelilogiikka
-Pelilogiikan funktiot käyvät läpi taulukkoa, joka koostuu kuudesta seitsemän merkin pituisesta listasta. Pelilogiikan testeissä (sekä muissa testeissä) olen alustanut itse taulukot, jotta pelilauta olisi helpompi visualisoida. Pelilogiikan testit testaavat, että src/files/game_logic.py tiedoston luokan ```MainGame``` käyvät pelilautaa läpi tarkoitetulla tavalla, esimerkiksi testaamalla löytyykö vaaka- pysty- tai viistosuuntainen neljän suora toisille pelaajista.
+Pelilogiikan funktiot käyvät läpi taulukkoa, joka koostuu kuudesta seitsemän merkin pituisesta listasta. Pelilogiikan testeissä (sekä muissa testeissä) olen alustanut itse taulukot, jotta pelilauta olisi helpompi visualisoida. Pelilogiikan testit testaavat, että tiedoston src/files/game_logic.py  luokan ```MainGame``` funktiot käyvät pelilautaa läpi tarkoitetulla tavalla, esimerkiksi testaamalla löytyykö vaaka- pysty- tai viistosuuntainen neljän suora toisille pelaajista.
 
 #### Minimax
 Tiedostossa minimax.py olevn luokan ```Minimax``` kaikkien funktioiden toimintaa on testattu. Pelitilanteen heuristisen arvon laskevaa funktiota score on testattu valmiilla pelilaudalla ja funktiota rate_possible_move valmiilla neljän riveillä. Minimax-algoritmin toimintaa on testattu valmiilla pelitilanteilla, joissa tietokone tulee joko häviämään seuraavalla siirrolla tai voittamaan varmasti x siirron jälkeen. Testeissä testataan, että algoritmi löytää parhaimman seuraavan liikeeen voiton kannalta.
