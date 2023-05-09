@@ -47,7 +47,7 @@ class Minimax:
 
         if max_player:
             max_value = -inf
-            for col in valid_locations:
+            for col in order:
                 row = self.game.get_empty_row(board, col)
                 if row == -1:
                     continue
@@ -64,7 +64,7 @@ class Minimax:
 
         else:
             min_value = inf
-            for col in valid_locations:
+            for col in order:
                 row = self.game.get_empty_row(board, col)
                 if row == -1:
                     continue
