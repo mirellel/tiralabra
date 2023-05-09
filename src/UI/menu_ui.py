@@ -4,23 +4,23 @@ import pygame
 class MenuUI:
     '''Luokka, joka vastaa aloitusmenun UI:sta'''
     def __init__(self):
-        self.screen = pygame.display.set_mode((700, 700))
-        self.two_player_button = pygame.Rect(100, 200, 500, 150)
-        self.singleplayer_button = pygame.Rect(100, 400, 500, 150)
-        self.easy_button = pygame.Rect(50, 400, 150, 120)
-        self.medium_button = pygame.Rect(270, 400, 170, 120)
-        self.hard_button = pygame.Rect(500, 400, 150, 120)
+        self.screen = pygame.display.set_mode((700, 850))
+        self.two_player_button = pygame.Rect(100, 300, 500, 150)
+        self.singleplayer_button = pygame.Rect(100, 500, 500, 150)
+        self.easy_button = pygame.Rect(50, 500, 150, 120)
+        self.medium_button = pygame.Rect(270, 500, 170, 120)
+        self.hard_button = pygame.Rect(500, 500, 150, 120)
         '''Tarvittavia värejä ja fontti'''
-        self.red = (153, 37, 37)
+        self.red = (149, 18, 18)
         self.black = (0, 0, 0)
         self.light_grey = (143, 141, 141)
-        self.dark_grey = (115, 114, 114)
+        self.dark_grey = (94, 90, 90)
         pygame.font.init()
         self.font = pygame.font.SysFont("EB Garamond", 40)
 
     def setup(self):
         '''Asettaa otsikon'''
-        pygame.display.set_caption("Connect 4")
+        pygame.display.set_caption("NELJÄN SUORA - Twilight Edition")
 
     def draw_text(self, text, x_value, y_value):
         '''Funktio vastaa teksin kirjoittamisesta'''
@@ -37,15 +37,16 @@ class MenuUI:
         mouse = pygame.mouse.get_pos()
         buttons = [self.two_player_button, self.singleplayer_button]
         self.screen.fill(self.red)
+        self.draw_text("OLETKO VALMIS PELAAMAAN?", 75, 80)
 
         for button in buttons:
             self.draw_button(button, self.dark_grey)
             if button.collidepoint(mouse):
                 self.draw_button(button, self.light_grey)
 
-        self.draw_text("VALITSE VASTUSTAJASI:", 120, 100)
-        self.draw_text("KAVERI (2 PELAAJAA)", 150, 250)
-        self.draw_text("TIETOKONE", 150, 450)
+        self.draw_text("VALITSE VASTUSTAJASI:", 120, 200)
+        self.draw_text("KAVERI (2 PELAAJAA)", 150, 350)
+        self.draw_text("TIETOKONE", 200, 550)
         pygame.display.flip()
 
     def draw_screen_clicked(self):
@@ -55,18 +56,19 @@ class MenuUI:
         buttons = [self.two_player_button, self.easy_button,
                    self.medium_button, self.hard_button]
         self.screen.fill(self.red)
+        self.draw_text("OLETKO VALMIS PELAAMAAN?", 75, 80)
 
         for button in buttons:
             self.draw_button(button, self.dark_grey)
             if button.collidepoint(mouse):
                 self.draw_button(button, self.light_grey)
 
-        self.draw_text("VALITSE VASTUSTAJASI:", 120, 100)
-        self.draw_text("KAVERI (2 PELAAJAA)", 150, 250)
-        self.draw_text("Jacob", 80, 420)
-        self.draw_text("(helppo)", 60, 460)
-        self.draw_text("Bella", 310, 420)
-        self.draw_text("(keskitaso)", 275, 460)
-        self.draw_text("Edward", 515, 420)
-        self.draw_text("(vaikea)", 515, 460)
+        self.draw_text("VALITSE VASTUSTAJASI:", 120, 200)
+        self.draw_text("KAVERI (2 PELAAJAA)", 150, 350)
+        self.draw_text("Jacob", 80, 520)
+        self.draw_text("(helppo)", 60, 560)
+        self.draw_text("Bella", 310, 520)
+        self.draw_text("(keskitaso)", 275, 560)
+        self.draw_text("Edward", 515, 520)
+        self.draw_text("(vaikea)", 515, 560)
         pygame.display.flip()

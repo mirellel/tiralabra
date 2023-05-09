@@ -28,7 +28,7 @@ class GameUI:
     def setup(self):
         '''Funktio, joka määrittää pygame ikkunan ja sen otsikon'''
         self.screen = pygame.display.set_mode((self.width, self.height+150))
-        pygame.display.set_caption("CONNECT 4")
+        pygame.display.set_caption("NELJÄN SUORA - Twilight edition")
 
     def draw_board(self, board, game_over, mouse_position, green_turn,
                    green_win, red_win, ai_player, tie, opponent):
@@ -67,9 +67,11 @@ class GameUI:
                 self.draw_opponent_text(opponent)
             else:
                 if red_win:
-                    self.draw_opponent__victory_text(opponent)
+                    self.draw_opponent_victory_text(opponent)
                 if green_win:
-                    self.draw_opponent__defeat_text(opponent)
+                    self.draw_opponent_defeat_text(opponent)
+                if tie:
+                    self.draw_opponent_tie_text(opponent)
         if game_over:
             if tie:
                 self.draw_tie()
@@ -137,7 +139,7 @@ class GameUI:
             text = self.font.render(":  *lukee mieltäsi*", True, (0, 0, 0))
         self.screen.blit(text, (110, 750))
 
-    def draw_opponent__victory_text(self, opponent):
+    def draw_opponent_victory_text(self, opponent):
         if opponent == "jacob":
             text =self.font.render(":  Hah! Voitin!", True, (0, 0, 0))
         if opponent == "bella":
@@ -146,11 +148,20 @@ class GameUI:
             text = self.font.render(":  Alice näki, että voitan", True, (0, 0, 0))
         self.screen.blit(text, (110, 750))
 
-    def draw_opponent__defeat_text(self, opponent):
+    def draw_opponent_defeat_text(self, opponent):
         if opponent == "jacob":
             text =self.font.render(":  Vaadin uusintaottelua!", True, (0, 0, 0))
         if opponent == "bella":
             text = self.font.render(":   Vau.. Sinä voitit", True, (0, 0, 0))
         if opponent == "edward":
             text = self.font.render(":   Tämän ei olisi pitänyt tapahtua..", True, (0, 0, 0))
+        self.screen.blit(text, (110, 750))
+
+    def draw_opponent_tie_text(self, opponent):
+        if opponent == "jacob":
+            text =self.font.render(":  Pelataan uudestaan!", True, (0, 0, 0))
+        if opponent == "bella":
+            text = self.font.render(":   Hei, tasapeli!", True, (0, 0, 0))
+        if opponent == "edward":
+            text = self.font.render(":   Pelasit hyvin.", True, (0, 0, 0))
         self.screen.blit(text, (110, 750))
