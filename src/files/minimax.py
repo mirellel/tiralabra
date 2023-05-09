@@ -124,6 +124,8 @@ class Minimax:
         heuristisen arvon'''
         score = 0
         self.opponent = 1
+        if piece == 1:
+            self.opponent = 2
         if possible_move.count(piece) == 4:
             score += 10
         elif possible_move.count(piece) == 3 and possible_move.count(0) == 1:

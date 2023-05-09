@@ -140,3 +140,23 @@ class TestMinimax(unittest.TestCase):
         board = self.board
         valid_locations = self.minimax.get_valid_locations(board)
         self.assertEqual(valid_locations, [0, 1, 2, 3, 4, 5, 6])
+
+    def test_score(self):
+        self.board = [[0, 1, 2, 2, 1, 0, 0],
+                      [0, 1, 1, 2, 1, 0, 0],
+                      [0, 0, 1, 1, 2, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0]]
+        piece = 2
+        score = self.minimax.score(self.board, piece)
+        # pisteet: keskellä on 2 kakkosta = 6 pistettä
+        # kolme kakkosta oikealle viistoon = 10 pistettä
+        # kaksi kakkosta oikealle viistoon = 4 pistettä
+        # kolme ykköstä oikealle viistoon = -10 pistettä
+        # kaksi ykköstä oikealle viistoon x3 = -8 pistettä
+        # kaksi ykköstä vasemmalle viistoon x2 = -8 pistettä
+        # kaksi ykköstä vaakarivillä = -4 pistettä
+        # kaksi ykkösyä pystysuunnassa = -4 pistettä
+        # 20 - 10 - 8 -8 - 4 - 4 -4 =  -18
+        self.assertEqual(score, -18)
