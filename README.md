@@ -1,8 +1,11 @@
-# Connect Four AI
+# Neljän Suora AI
 ![GHA_workflow_badge](https://github.com/mirellel/tiralabra/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/mirellel/tiralabra/branch/main/graph/badge.svg?token=5FQTHJ4CLM)](https://codecov.io/gh/mirellel/tiralabra)
 
-Projekti Helsingin yliopiston kurssille Tietorakenteet ja algoritmit 2023
+#### Oletko ikinä toivonut, että voisit pelata lautapelejä Twilight-sarjan hahmoja vastaan? Nyt se on mahdollista! 
+Lataamalla tämän sovelluksen itsellesi, voit pelata Neljän suora -klassikkopeliä Jacobia, Bellaa ja Edwardia vastaan. Ole varuillasi, sillä Edward-vampyyri osaa huhujen mukaan lukea ajatuksia.. hänen voittamisensa ei tule olemaan helppoa. Katso [käyttöohjeesta](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/k%C3%A4ytt%C3%B6ohje.md) tarkemmat ohjeet lataamiseen ja käyttöön.
+
+Tämä sovellus on toteutettu Helsingin yliopiston kurssia Tietorakenteet ja algoritmit (kevät 2023) varten
 
 ## Dokumentaatio
 [Määrittelydokumentti](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/määrittelydokumentti.md)
