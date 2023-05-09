@@ -14,7 +14,7 @@ Testikattavuusraportin saa generoitua komennolla ```poetry run invoke coverage-r
 ![image](https://github.com/mirellel/tiralabra/assets/101889891/753ee779-5334-4216-93c4-72ddf46881fe)
 
 
-Testikattavuuden ulkopuolelle jää pelin ja menun UI:sta huolehtivat luokat, jotka ovat omassa kansiossaan UI. Kattavuudesta on jätetty pois myös files kansiossa olevat tiedostot multiplayer.py ja singleplayer.py, joissa olevat luokat huolehtivat yksin- ja kaksinpelin instansseista ja käsittelevät pygame tapahtumia seka menu.py, joka pääosin kutsuu ```MenuUI```-luokan funktioita. Jätin ne testikattavuudetsa pois, sillä luokissa ei ole kattavasti testattavaa. Pois on jätetty myös tiedosto load_image.py.
+Testikattavuuden ulkopuolelle jää pelin ja menun UI:sta huolehtivat luokat, jotka ovat omassa kansiossaan UI. Kattavuudesta on jätetty pois myös files kansiossa olevat tiedostot multiplayer.py ja singleplayer.py, joissa olevat luokat huolehtivat yksin- ja kaksinpelin instansseista ja käsittelevät pygame tapahtumia seka menu.py, joka pääosin kutsuu ```MenuUI```-luokan funktioita. Jätin ne testikattavuudetsa pois, sillä luokissa ei ole kattavasti testattavaa. Pois on jätetty myös tiedosto load_image.py, joka lataa peliin käytettävät kuvat.
 
 ## Mitä on testattu
 Testit ovat tehty Unittest-yksikkötesteillä ja ne testaavat pelilogiikkaa, pelin pyörimistä ja toimintaa (siirron tekeminen, uudelleen aloitus, voitontarkastus yms.) sekä minimax-algoritmin toimintaa.
