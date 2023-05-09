@@ -3,3 +3,4 @@ __pycache__
 .coverage
 src/*/__pycache__
 ..gitignore.swp
+.coverage
