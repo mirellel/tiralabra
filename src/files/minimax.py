@@ -127,10 +127,10 @@ class Minimax:
         if piece == 1:
             self.opponent = 2
         if possible_move.count(piece) == 4:
-            score += 10
+            score += 100
         elif possible_move.count(piece) == 3 and possible_move.count(0) == 1:
             score += 10
-        elif possible_move.count(piece) == 2 and possible_move.count(0) ==2:
+        elif possible_move.count(piece) == 2 and possible_move.count(0) == 2:
             score += 4
         if possible_move.count(self.opponent) == 3 and possible_move.count(0) == 1:
             score -= 10
