@@ -1,12 +1,12 @@
 '''Moduuli, joka sisältää luokan Game'''
-from files.game_logic import MainGame
+from files.game_logic import GameLogic
 from files.minimax import Minimax
 
 class Game:
     '''Luokka, joka vastaa pelin tapahtumien kulusta'''
     def __init__(self):
         '''Alustaa luokan attribuutit'''
-        self.game_logic = MainGame()
+        self.game_logic = GameLogic()
         self.minimax = Minimax()
 
         self.board = [[0 for x in range(7)] for y in range(6)]

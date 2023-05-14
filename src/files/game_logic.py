@@ -1,5 +1,5 @@
 ''''Moduuli, joka sisältää pelilogiikasta vastaavan luokan MainGame'''
-class MainGame():
+class GameLogic():
     '''Luokka joka vastaa pelilogiikasta'''
     def __init__(self):
 

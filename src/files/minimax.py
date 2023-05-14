@@ -1,7 +1,7 @@
 '''Moduuli, joka sisältää minimax-algoritmin suorittavan luokan Minimax'''
 from math import inf
 import numpy as np
-from files.game_logic import MainGame
+from files.game_logic import GameLogic
 order = [3, 2, 4, 1, 5, 0, 6]
 
 class Minimax:
@@ -10,7 +10,7 @@ class Minimax:
 
     def __init__(self):
         '''Alustaa luokan attributit'''
-        self.game = MainGame()
+        self.game = GameLogic()
         self.max_score = 1000000000000
         self.min_score = -100000000000
 
