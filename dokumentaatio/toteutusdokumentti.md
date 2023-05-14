@@ -39,11 +39,11 @@ Toteutuva aikavaativuus on parhaimmillaan siis O($\sqrt{(7²)}$) ja huonoimmilla
 
 Toisaalta jos paras siirto ei löydykkään keskeltä koko puu pitää käydä läpi eli alpha-beta-karsintaa ei voitu hyödyntää, on aikavaativuus O($b^d$) eli  O($7^d$).
 
-Minimax-algortimin tilavaativuus on O(b * d), jossa b on haarautumien määrä ja d haun syvyys.
+Ilman alfa-beta-karsintaa pelkän Minimax-algortimin tilavaativuus on O(b * d), jossa b on haarautumien määrä ja d haun syvyys.
 
 ## Puutteet ja parannusehdotukset
 - Minimaxin toimintaa olisi voinut nopeuttaa tehostamalla pelilogiikan funktioita
-- Vihjeen antaminen kahden ihmispelaajalle parhaasta siirrotsa voisi olla hyvä lisä, jota en ehtinyt toteuttaa
+- Vihjeen antaminen ihmispelaajalle parhaasta siirrosta voisi olla hyvä lisä, jota en ehtinyt toteuttaa
 - Voittotiedot olisi voinut tallentaa, jotta pelaaja näkee pelihistoriansa.
 
 ## Lähteet
