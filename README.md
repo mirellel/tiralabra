@@ -8,6 +8,8 @@ Lataamalla tämän sovelluksen itsellesi, voit pelata Neljän suora -klassikkope
 Tämä sovellus on toteutettu Helsingin yliopiston kurssia Tietorakenteet ja algoritmit (kevät 2023) varten
 
 ## Dokumentaatio
+[Käyttöohje](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/k%C3%A4ytt%C3%B6ohje.md)
+
 [Määrittelydokumentti](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/määrittelydokumentti.md)
 
 [Testausdokumentti](https://github.com/mirellel/tiralabra/blob/main/dokumentaatio/testausdokumentti.md)
